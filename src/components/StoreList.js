@@ -1,9 +1,11 @@
 import React from "react"
 import Store from "./Store"
 
-function StoreList() {
-
-
+function StoreList({ stores, search }) {
+    const filteredStores = stores.filter(store => {
+        return store.name.toLowerCase().includes(search.toLowerCase()) //to lower case
+    })
+    const renderStores = filteredStores.map(store => <Store store={store} key={store.id}/>) //make sure to update with filtered stores, not ALL the stores
     return(
         <table>
             <tbody>
@@ -21,7 +23,7 @@ function StoreList() {
                         Episode
                     </th>
                 </tr>
-                {/** Render a list of <Store> components here. */}
+                {renderStores}
             </tbody>
         
         </table>
